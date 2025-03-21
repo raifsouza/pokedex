@@ -1,37 +1,80 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
 
-/* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+:root {
+  --ion-background-color: #e1121c;
+  --ion-text-color: #000000;
+  --ion-toolbar-background: #4781c0;
+  --ion-item-background: #ffffff;
+  --ion-card-background: #ffffff;
+}
 
-/* Basic CSS for apps built with Ionic */
-@import "@ionic/angular/css/normalize.css";
-@import "@ionic/angular/css/structure.css";
-@import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
-@import "@ionic/angular/css/padding.css";
-@import "@ionic/angular/css/float-elements.css";
-@import "@ionic/angular/css/text-alignment.css";
-@import "@ionic/angular/css/text-transformation.css";
-@import "@ionic/angular/css/flex-utils.css";
+.dark-theme {
+  --ion-background-color: #121212;
+  --ion-text-color: #ffffff;
+  --ion-toolbar-background: #172331;
+  --ion-item-background: #1e1e1e;
+  --ion-card-background: #1e1e1e;
+}
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+body {
+  background-color: var(--ion-background-color);
+  color: var(--ion-text-color);
+  transition: background-color 0.3s ease, color 0.3s ease; 
+}
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+ion-searchbar {
+  --background: #f8f8f8 !important;
+  --color: #000000 !important;
+  --placeholder-color: gray !important;
+  --clear-button-color: black !important; 
+  --icon-color: black !important; 
+}
+
+ion-toolbar {
+  --background: var(--ion-toolbar-background);
+  --color: var(--ion-text-color);
+}
+
+
+ion-item {
+  --background: var(--ion-item-background);
+  --color: var(--ion-text-color);
+}
+
+
+ion-card {
+  --background: var(--ion-card-background);
+  --color: var(--ion-text-color);
+}
+
+/*TEMA ESCURO*/
+
+.dark-theme ion-searchbar {
+  --background: #1e1e1e !important;
+  --color: #ffffff !important;
+  --placeholder-color: #bbbbbb !important;
+  --clear-button-color: white !important;
+  --icon-color: white !important;
+}
+
+.dark-theme ion-content {
+  --background: var(--ion-background-color);
+}
+
+
+.dark-theme ion-spinner {
+  --color: white;
+}
+
+.dark-theme ion-card-title {
+  color: white !important;
+}
+
+.dark-theme a {
+  color: #bb86fc;
+}
+
+
+.dark-theme ion-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

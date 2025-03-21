@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <span class="arrow arrow-left" (click)="voltarParaHome()">
+        <img src="../../assets/icon/chevron-back-circle-outline.svg" alt="Anterior">
+      </span>
+    </ion-buttons>
+    <ion-title class="center-title">Detalhes do Pokémon</ion-title>
+    <ion-buttons slot="end">
+      <ion-toggle [checked]="isDarkMode" (ionChange)="toggleTheme($event)">
+      </ion-toggle>
+      <img class="imagem-container" *ngIf="!isDarkMode" src="../../assets/icon/sunny.svg" alt="Modo Claro">
+      <img class="imagem-container" *ngIf="isDarkMode" src="../../assets/icon/moon.svg" alt="Modo Escuro">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [ngClass]="{ 'dark-theme': isDarkMode }">
+  <ng-container *ngIf="pokemon; else loading">
+    <div class="card-container">
+      <span class="arrow arrow-left" (click)="carregarPokemonAnterior()">
+        <img src="../../assets/icon/chevron-back-circle-outline.svg" alt="Anterior">
+      </span>
+
+      <ion-card [ngClass]="{ 'dark-card': isDarkMode }">
+        <img [src]="pokemon.sprites?.front_default" alt="{{ pokemon.name }}" />
+        <ion-card-header>
+          <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Altura:</strong> {{ formatarAltura(pokemon.height) }}</p>
+          <p><strong>Peso:</strong> {{ formatarPeso(pokemon.weight) }}</p>
+          <p><strong>Tipos:</strong></p>
+          <ul>
+            <li *ngFor="let type of pokemon.types">
+              {{ getTipoTraduzido(type.type.name) }}
+            </li>
+          </ul>
+          <p><strong>Habilidades:</strong></p>
+          <ul>
+            <li *ngFor="let ability of pokemon.abilities">
+              {{ ability.ability.name | titlecase }}
+            </li>
+          </ul>
+        </ion-card-content>
+      </ion-card>
+      <span class="arrow arrow-right" (click)="carregarProximoPokemon()">
+        <img src="../../assets/icon/chevron-forward-circle-outline.svg" alt="Próximo">
+      </span>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Carregando...</p>
+  </ng-template>
+</ion-content>

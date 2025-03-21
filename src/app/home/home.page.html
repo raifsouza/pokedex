@@ -1,20 +1,41 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+    <ion-title class="center-title">Pokédex</ion-title>
+    <ion-buttons slot="start">
+      <ion-toggle [checked]="isDarkMode" (ionChange)="toggleTheme($event)">
+      </ion-toggle>
+      <img class="imagem-container" *ngIf="!isDarkMode" src="../../assets/icon/sunny.svg" alt="Modo Claro">
+      <img class="imagem-container" *ngIf="isDarkMode" src="../../assets/icon/moon.svg" alt="Modo Escuro">
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleView('list')">
+        <img src="../../assets/icon/list-outline.svg" alt="Lista" width="30">
+      </ion-button>
+      <ion-button (click)="toggleView('grid')">
+        <img src="../../assets/icon/grid-outline.svg" alt="Grade" width="30">
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>  
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-searchbar (ionInput)="filtrarPokemons($event)" placeholder="Pesquisar Pokémon"></ion-searchbar>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div [ngClass]="viewMode === 'grid' ? 'grid-view' : 'list-view'">
+    <div *ngFor="let pokemon of pokemonsFiltrados" class="pokemon-item">
+      <ion-card *ngIf="viewMode === 'grid'" [href]="'/details/' + pokemon.name">
+        <ion-card-header>
+          <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+        </ion-card-header>
+        <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + (pokemon.url.split('/')[6]) + '.png'">
+      </ion-card>
+
+      <ion-item *ngIf="viewMode === 'list'" [href]="'/details/' + pokemon.name">
+        <ion-thumbnail slot="start">
+          <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + (pokemon.url.split('/')[6]) + '.png'">
+        </ion-thumbnail>
+        <ion-label>{{ pokemon.name | titlecase }}</ion-label>
+      </ion-item>
+    </div>
   </div>
 </ion-content>
